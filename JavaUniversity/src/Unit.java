@@ -79,8 +79,6 @@ public class Unit {
 
     	for(Assessment assessment : assessments) {
     		
-    		int weight = assessment.getWeight();
-    		
     		// look up the student in the marks for each assessment
         	HashMap<String, Mark> allMarks = assessment.getMarks();
         	double mark = allMarks.get(studentId).getMark();
