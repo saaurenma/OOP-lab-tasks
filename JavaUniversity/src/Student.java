@@ -4,7 +4,7 @@ public class Student {
 	/*
 	I have used a string for studentId, because in java, the int type can only hold
 	whole numbers up to 2147483647 meaning that we are limited in terms of length options for id,
-	whereas a string means that we are able to have a length up to 2,147,483,647 numbers,
+	whereas a string means that we are able to have a length up to 2,147,483,647 characters,
 	which is more than enough room to expand our id system.
 	
 	The String datatype also means we can concatenate a letter at the beginning of the id
@@ -36,6 +36,10 @@ public class Student {
         givenName = newGivenName;
         familyName = newFamilyName;
     	
+    }
+    
+    public String getStudentId() {
+    	return studentId;
     }
     
     public void setGivenName(String newGivenName) {

@@ -2,97 +2,106 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class University {
 	
 	
     private ArrayList<Unit> units;
+    private HashMap<String, Student> students = new HashMap<String, Student>();
     
     public University() {
     	units = new ArrayList<Unit>();
     }
-	
-	private void createUnits() {
-		
-        Unit unit1 = new Unit("FIT1234","Advanced Bogosorts");
-        Unit unit2 = new Unit("FIT2027","Introduction to Spaghetti Coding");
-        Unit unit3 = new Unit("FIT3456","Enterprise Fizzbuzz");
-        
-		units.add(unit1);
-		units.add(unit2);
-		units.add(unit3);
-		
-		for (Unit currentUnit: units) {
-			
-			System.out.println("Entering students for " + currentUnit.description());
-			
-			boolean addStudents = true;
-			
-			String nextUnit = readString("Press enter to enroll new student, and type anything to go to next unit: ");
-			
-			if (!nextUnit.equals("")) {
-				addStudents = false;
-			}
-					
-			while (addStudents == true) {
-				String newStudentId = readString("Enter a student id: ");
-				String newGivenName = readString("Enter a student given name:");
-				String newFamilyName = readString("Enter a student surname: ");
-
-				Student newStudent = new Student(newStudentId, newGivenName, newFamilyName);
-				
-				currentUnit.enrolStudent(newStudent);
-				
-				nextUnit = readString("Press enter to enroll new student, and type anything to go to next unit: ");
-
-				
-				if (!nextUnit.equals("")){
-					addStudents = false;
-				}
-				
-				System.out.println("");
-				
-						
-				}
-			}
-				
-			
-		}
-		
-	
-	
-	private void displayUnits() {
-		
-		
-        for (int i = 0; i < units.size(); i++) {
-            System.out.println("");
-
-        	Unit currentUnit = units.get(i);
     
-            String description = currentUnit.description();
-            System.out.println(description);
-            System.out.println("Enrolled Students:");
-            
-            ArrayList<Student> studentsEnrolled = currentUnit.getStudents();
-            
-            for (Student currentStudent: studentsEnrolled) {
-            	 
-            	System.out.println(currentStudent.description());
-            	
-            	}
-            
-        }
-        
-	}
+    
+    public void admitStudent(Student newStudent) {
+    	
+    	students.put(newStudent.getStudentId(), newStudent);
+    }
+    
+    
+	
 
+	public Student getStudentById(String studentId) {
+		
+		Student student = students.get(studentId);
+		
+		return student;
+	}
+	
+	
+	
+	
+
+	
+
+    public void test() {
+    	
+    	University myUniversity = new University();
+    	
+    	Unit myUnit = new Unit("FIT1234","Intro to Programming");
+    	units.add(myUnit);
+    	
+
+    	Assignment myAssignment = new Assignment(40,"PYTHON ASSIGNMENT");
+    	Exam myExam = new Exam(60,100);
+    	
+    	Mark myMark2 = new Mark(65);
+       	Student myStudent2 = new Student("123456","John","Doe");
+    	Student myStudent3 = new Student("2468910","Jimmy","Jones");
+    	
+    	myUniversity.admitStudent(myStudent2);
+    	myUniversity.admitStudent(myStudent3);
+
+    	
+    	myUnit.enrolStudent("123456");
+    	myUnit.enrolStudent("2468910");
+    	
+    	myUnit.addAssessmentScheme(myExam);
+    	myUnit.addAssessmentScheme(myAssignment);
+    	myUnit.addAssessmentScheme(myExam);
+
+    	myUnit.printAssessmentScheme();
+    	
+    	myExam.addMark(myStudent2, myMark2);
+    	
+    	Mark myMark3 = new Mark(80,"nice");
+    	Mark myMark4 = new Mark(44);
+    	myExam.addMark(myStudent3, myMark3);
+    	myAssignment.addMark(myStudent3, myMark4);
+    	
+    
+    	
+    	HashMap<String, Mark> myMarks = myExam.getMarks();
+
+    	for (Map.Entry<String, Mark> entry : myMarks.entrySet()) {
+    	    System.out.println(entry.getKey()+" : "+entry.getValue().getMark());
+    	}    	
+    	
+    	/*
+    	 * ADDED MARK HASHMAP TO ASSESSMENT.JAVA, MARKS ADDED BY (STUDENTID,MARK)
+    	 * NEED TO DO TASK 5
+    	 * 
+    	 */
+    	
+    	System.out.println(myUnit.checkIfStudentCompleted(myStudent3));
+    	
+    	
+    }
+    
+	
     public void printStatus() {     
     	// this method prints out the welcome and goodbye statements
     	// and also calls the methods to create and display units
     	
         System.out.println("Welcome to Java University");
-        createUnits();
-        displayUnits();
+        //createUnits();
+        //displayUnits();
+        test();
         System.out.println("Thank you for using Java University");
 
     }

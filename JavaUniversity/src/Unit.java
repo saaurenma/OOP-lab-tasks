@@ -1,39 +1,99 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Unit {
-	/*
-	 I have used an ArrayList to hold the students enrolled in a unit.
-	 
-	 This is because native java arrays do not allow us to change the length of the array
-	 once it has been created, but the length of an ArrayList is dynamic meaning that we do
-	 not have to adjust the length every time a student is enrolled (or unenrolled if implemented
-	 in the future).
-	 
-	 In this manner, ArrayList means that there is no unnecessary processing 
-	 to change the length each time a student is added to a unit. This also means
-	 it is easier for other developers to read and understand the code.
-	 
-	*/
 	
-    private ArrayList<Student> students = new ArrayList<Student>();
-    private String code;
+	/*
+	 * Set will by nature make sure that duplicate student ids are not entered
+	 */
+    Set<String> enrolledStudents = new HashSet<String>(); 
+	private AssessmentScheme assessmentScheme = new AssessmentScheme();
+
+	private String code;
     private String name;
+
     
     public Unit(String newCode, String newName) {
     	
     	code = newCode;
-    	name = newName;
+    	name = newName;	
+    }
+   
+    
+    public void addAssessmentScheme(Assessment assessment) {
+    	
+    	assessmentScheme.addAssessment(assessment);
+    	
+    }
+    
+    public void printAssessmentScheme() {
+    	assessmentScheme.printAssessment();
+    }
+    
+    // made public so can test in uni
+    public boolean checkIfStudentCompleted(Student student) {
+    	
+        boolean hasCompleted = false;
+        String studentId = student.getStudentId();
+        if (!enrolledStudents.contains(studentId)) {
+        	// the student is not enrolled in the unit, so they have not completed the asesement
+        	return hasCompleted;
+        }
+        
+        else {
+        	
+        	
+        	ArrayList<Assessment> assessments = assessmentScheme.getAssessmentSchemeList();
+        	
+        	int numberAssessments = assessments.size();
+        	int studentAssessments = 0;
+        	
+        	for(Assessment assessment : assessments) {
+        		
+        		HashMap<String, Mark> allMarks = assessment.getMarks();
+        		// look up the student in the marks for each assessment
+        		if (allMarks.get(studentId) != null) {
+        			studentAssessments++;
+        		}
+        		
+        	}
+        	
+        	if (studentAssessments == numberAssessments) {
+        		hasCompleted = true;
+        	}
+        	
+        }
+
+    	return hasCompleted;
+    }
+    
+
+    
+    public void enrolStudent(String admittedStudentId) {
+    	
+    	enrolledStudents.add(admittedStudentId);
     	
     }
     
     
-    public void enrolStudent(Student newStudent) {
+
+    public Student[] getStudents(University university) {
     	
-    	students.add(newStudent);
     	
-    }
-    
-    public ArrayList<Student> getStudents() {
+    	Student students[] = new Student[enrolledStudents.size()];
+    	
+    	int i = 0;
+    	
+    	// loop through the enrolled students
+        for (String student : enrolledStudents) {
+        	// lookup studentid in hashmap
+            Student currentStudent = university.getStudentById(student);
+            students[i] = currentStudent;
+            i++;
+         }    	
+    	
     	return students;
     }
 	
