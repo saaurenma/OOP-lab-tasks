@@ -63,7 +63,6 @@ public class University {
     	
     	myUnit.addAssessmentScheme(myExam);
     	myUnit.addAssessmentScheme(myAssignment);
-    	myUnit.addAssessmentScheme(myExam);
 
     	myUnit.printAssessmentScheme();
     	
@@ -74,6 +73,8 @@ public class University {
     	myExam.addMark(myStudent3, myMark3);
     	myAssignment.addMark(myStudent3, myMark4);
     	
+    	System.out.println(myUnit.getStudentMark(myStudent3));
+    	
     
     	
     	HashMap<String, Mark> myMarks = myExam.getMarks();
@@ -82,11 +83,6 @@ public class University {
     	    System.out.println(entry.getKey()+" : "+entry.getValue().getMark());
     	}    	
     	
-    	/*
-    	 * ADDED MARK HASHMAP TO ASSESSMENT.JAVA, MARKS ADDED BY (STUDENTID,MARK)
-    	 * NEED TO DO TASK 5
-    	 * 
-    	 */
     	
     	System.out.println(myUnit.checkIfStudentCompleted(myStudent3));
     	

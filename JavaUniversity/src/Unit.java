@@ -69,7 +69,29 @@ public class Unit {
     	return hasCompleted;
     }
     
+    public double getStudentMark(Student student) {
+    	
+        double finalMark = 0;
+        
+        String studentId = student.getStudentId();
+        
+    	ArrayList<Assessment> assessments = assessmentScheme.getAssessmentSchemeList();
 
+    	for(Assessment assessment : assessments) {
+    		
+    		int weight = assessment.getWeight();
+    		
+    		// look up the student in the marks for each assessment
+        	HashMap<String, Mark> allMarks = assessment.getMarks();
+        	double mark = allMarks.get(studentId).getMark();
+        	
+            finalMark += (mark* (assessment.getWeight())/100);
+    		
+    	}
+    	
+        
+    	return finalMark;
+    }
     
     public void enrolStudent(String admittedStudentId) {
     	
