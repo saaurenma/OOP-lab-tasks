@@ -5,18 +5,28 @@ public class AssessmentScheme {
 	
 	private ArrayList<Assessment> assessmentList;
 	
-	public AssessmentScheme() {
-		assessmentList = new ArrayList<Assessment>();
-	}
 	
-	public void addAssessment(Assessment assessment) {
-		assessmentList.add(assessment);
+	public AssessmentScheme(ArrayList<Assessment> newAssessments) {
 		
+		double weightSum = 0;
+		for (Assessment assessment : newAssessments)
+			weightSum += assessment.getWeight();
+		
+		if (weightSum != 100) {
+			throw new IllegalArgumentException("Sum of weights in AssessmentScheme must equal 100");
+		}
+	
+		assessmentList = newAssessments;
 	}
 	
+
+	
+	
+	// add deep copy constructor, create new mark object for each
+	// iteration of assessment
 	
 	public ArrayList<Assessment> getAssessmentSchemeList() {
-		
+		// privacy leak here
 		return assessmentList;
 		
 	}

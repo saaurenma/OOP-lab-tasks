@@ -17,8 +17,7 @@ public class University {
     	units = new ArrayList<Unit>();
     }
     
-    
-    public void admitStudent(Student newStudent) {
+    private void admitStudent(Student newStudent) {
     	
     	students.put(newStudent.getStudentId(), newStudent);
     }
@@ -32,37 +31,37 @@ public class University {
 		
 		return student;
 	}
-	
-	
-	
-	
-
-	
 
     public void test() {
     	
     	University myUniversity = new University();
     	
+    	
     	Unit myUnit = new Unit("FIT1234","Intro to Programming");
     	units.add(myUnit);
     	
-
     	Assignment myAssignment = new Assignment(40,"PYTHON ASSIGNMENT");
     	Exam myExam = new Exam(60,100);
+    	ArrayList<Assessment> myArrayList = new ArrayList<Assessment>();
+    	myArrayList.add(myExam);
+    	myArrayList.add(myAssignment);
+    	
+    	
+    	AssessmentScheme myAssessmentScheme = new AssessmentScheme(myArrayList);
+    	myUnit.setAssessmentScheme(myAssessmentScheme);
     	
     	Mark myMark2 = new Mark(65);
-       	Student myStudent2 = new Student("123456","John","Doe");
-    	Student myStudent3 = new Student("2468910","Jimmy","Jones");
+       	Student myStudent2 = new Student("12345678","John","Doe");
+    	Student myStudent3 = new Student("12365474","Jimmy","Jones");
     	
     	myUniversity.admitStudent(myStudent2);
     	myUniversity.admitStudent(myStudent3);
 
     	
-    	myUnit.enrolStudent("123456");
-    	myUnit.enrolStudent("2468910");
+    	myUnit.enrolStudent("12345678");
+    	myUnit.enrolStudent("12365474");
     	
-    	myUnit.addAssessmentScheme(myExam);
-    	myUnit.addAssessmentScheme(myAssignment);
+
 
     	myUnit.printAssessmentScheme();
     	
@@ -74,12 +73,18 @@ public class University {
     	myAssignment.addMark(myStudent3, myMark4);
     	
     	System.out.println(myUnit.getStudentMark(myStudent3));
-    	
+
     
     	
     	HashMap<String, Mark> myMarks = myExam.getMarks();
 
     	for (Map.Entry<String, Mark> entry : myMarks.entrySet()) {
+    	    System.out.println(entry.getKey()+" : "+entry.getValue().getMark());
+    	}
+    	
+    	HashMap<String, Mark> myMarks2 = myAssignment.getMarks();
+
+    	for (Map.Entry<String, Mark> entry : myMarks2.entrySet()) {
     	    System.out.println(entry.getKey()+" : "+entry.getValue().getMark());
     	}    	
     	

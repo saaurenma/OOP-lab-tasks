@@ -26,15 +26,34 @@ public class Student {
     private String familyName;
     
     public Student(String newStudentId) {
+    	int studentIdLength = newStudentId.length();
+
+    	if (studentIdLength != 8) {
+    		
+    		throw new IllegalArgumentException("Student ID must be 8 digits");
+    		
+    	}
+    	
     	studentId = newStudentId;
     	
     }
     
     public Student(String newStudentId, String newGivenName, String newFamilyName) {
     	
+    	int studentIdLength = newStudentId.length();
+    	
+    	if (studentIdLength != 8) {
+    		
+    		throw new IllegalArgumentException("Student ID must be 8 digits");
+    		
+    	}
+    	
+    	// exception if studentIdLength != 8
+    	
         studentId = newStudentId;
         givenName = newGivenName;
         familyName = newFamilyName;
+        
     	
     }
     

@@ -9,23 +9,22 @@ public class Unit {
 	 * Set will by nature make sure that duplicate student ids are not entered
 	 */
     Set<String> enrolledStudents = new HashSet<String>(); 
-	private AssessmentScheme assessmentScheme = new AssessmentScheme();
+
 
 	private String code;
     private String name;
+    private AssessmentScheme assessmentScheme;
 
     
     public Unit(String newCode, String newName) {
     	
     	code = newCode;
-    	name = newName;	
+    	name = newName;
     }
    
     
-    public void addAssessmentScheme(Assessment assessment) {
-    	
-    	assessmentScheme.addAssessment(assessment);
-    	
+    public void setAssessmentScheme(AssessmentScheme assessments) {
+    	assessmentScheme = assessments;
     }
     
     public void printAssessmentScheme() {
@@ -74,11 +73,11 @@ public class Unit {
         double finalMark = 0;
         
         String studentId = student.getStudentId();
-        
+                
     	ArrayList<Assessment> assessments = assessmentScheme.getAssessmentSchemeList();
 
     	for(Assessment assessment : assessments) {
-    		
+    		    		
     		// look up the student in the marks for each assessment
         	HashMap<String, Mark> allMarks = assessment.getMarks();
         	double mark = allMarks.get(studentId).getMark();
