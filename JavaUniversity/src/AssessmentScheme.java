@@ -9,8 +9,10 @@ public class AssessmentScheme {
 	public AssessmentScheme(ArrayList<Assessment> newAssessments) {
 		
 		double weightSum = 0;
-		for (Assessment assessment : newAssessments)
+		for (Assessment assessment : newAssessments) {
 			weightSum += assessment.getWeight();
+			
+		}
 		
 		if (weightSum != 100) {
 			throw new IllegalArgumentException("Sum of weights in AssessmentScheme must equal 100");

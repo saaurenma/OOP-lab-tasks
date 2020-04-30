@@ -12,6 +12,7 @@ public class University {
 	
     private ArrayList<Unit> units;
     private HashMap<String, Student> students = new HashMap<String, Student>();
+    private ArrayList<Course> courses = new ArrayList<Course>();
     
     public University() {
     	units = new ArrayList<Unit>();
@@ -31,6 +32,9 @@ public class University {
 		
 		return student;
 	}
+	
+	
+
 
     public void test() {
     	
@@ -40,61 +44,55 @@ public class University {
     	Unit myUnit = new Unit("FIT1234","Intro to Programming");
     	units.add(myUnit);
     	
-    	Assignment myAssignment = new Assignment(40,"PYTHON ASSIGNMENT");
-    	Exam myExam = new Exam(60,100);
-    	ArrayList<Assessment> myArrayList = new ArrayList<Assessment>();
-    	myArrayList.add(myExam);
-    	myArrayList.add(myAssignment);
-    	
-    	
-    	AssessmentScheme myAssessmentScheme = new AssessmentScheme(myArrayList);
-    	myUnit.setAssessmentScheme(myAssessmentScheme);
-    	
-    	Mark myMark2 = new Mark(65);
-       	Student myStudent2 = new Student("12345678","John","Doe");
-    	Student myStudent3 = new Student("12365474","Jimmy","Jones");
-    	
-    	myUniversity.admitStudent(myStudent2);
-    	myUniversity.admitStudent(myStudent3);
-
-    	
-    	myUnit.enrolStudent("12345678");
-    	myUnit.enrolStudent("12365474");
-    	
-
-
-    	myUnit.printAssessmentScheme();
-    	
-    	myExam.addMark(myStudent2, myMark2);
-    	
-    	Mark myMark3 = new Mark(80,"nice");
-    	Mark myMark4 = new Mark(44);
-    	myExam.addMark(myStudent3, myMark3);
-    	myAssignment.addMark(myStudent3, myMark4);
-    	
-    	System.out.println(myUnit.getStudentMark(myStudent3));
-
-    
-    	
-    	HashMap<String, Mark> myMarks = myExam.getMarks();
-
-    	for (Map.Entry<String, Mark> entry : myMarks.entrySet()) {
-    	    System.out.println(entry.getKey()+" : "+entry.getValue().getMark());
+    	try {
+    		//test exam duration exception
+    		Exam myExam2 = new Exam(60,10);
+    	}
+    	catch(IllegalArgumentException e){
+    		System.out.println(e);
     	}
     	
-    	HashMap<String, Mark> myMarks2 = myAssignment.getMarks();
+    	try {
+    		Exam myExam2 = new Exam(60,190);
+    	}
+    	catch(IllegalArgumentException e){
+    		System.out.println(e);
+    	}
+    	
+    	
+    	try {
+    		Assignment myAssignment = new Assignment(0,"PYTHON ASSIGNMENT");
+    	}
+    	catch(IllegalArgumentException e){
+    		System.out.println(e);
+    	}
+    	
+    	try {
+    		Assignment myAssignment1 = new Assignment(20,"PYTHON ASSIGNMENT");
+    		Exam myExam1 = new Exam(20,150);
+    		ArrayList<Assessment> myScheme = new ArrayList<Assessment>();
+    		myScheme.add(myExam1);
+    		myScheme.add(myAssignment1);
 
-    	for (Map.Entry<String, Mark> entry : myMarks2.entrySet()) {
-    	    System.out.println(entry.getKey()+" : "+entry.getValue().getMark());
-    	}    	
+    		
+    		AssessmentScheme myAssignmentScheme = new AssessmentScheme(myScheme);
+    		
+    	}
+    	catch(IllegalArgumentException e){
+    		System.out.println(e);
+    	}
     	
     	
-    	System.out.println(myUnit.checkIfStudentCompleted(myStudent3));
+    	
+    	
+    	
+    	
+    	
+    	
     	
     	
     }
-    
-	
+    	
     public void printStatus() {     
     	// this method prints out the welcome and goodbye statements
     	// and also calls the methods to create and display units

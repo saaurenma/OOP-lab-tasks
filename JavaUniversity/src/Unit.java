@@ -70,6 +70,7 @@ public class Unit {
     
     public double getStudentMark(Student student) {
     	
+    	
         double finalMark = 0;
         
         String studentId = student.getStudentId();
@@ -95,6 +96,19 @@ public class Unit {
     	enrolledStudents.add(admittedStudentId);
     	
     }
+    
+    public Set<String> getEnrolledStudents() {
+    	Set<String> newEnrolledStudents = new HashSet<String>(); 
+    	
+    	 for (String student : enrolledStudents) {
+    		 
+    		 newEnrolledStudents.add(student);
+             
+          } 
+    	 
+    	 return newEnrolledStudents;
+    }
+    
     
     
 
