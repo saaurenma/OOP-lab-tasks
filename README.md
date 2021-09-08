@@ -1,3 +1,2 @@
-# LabTasks-sman0039
-
-A place to store Bootcamp files for FIT2099-S1-2020
+# OOP Lab Tasks
+Lab tasks for my Object Oriented Programming Course
